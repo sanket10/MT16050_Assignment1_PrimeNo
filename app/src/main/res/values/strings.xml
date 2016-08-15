@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PrimeNo</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="next">NEXT</string>
+    <string name="question">QUESTION</string>
+    <string name="Restart">RESTART</string>
+    <string name="action_settings">Settings</string>
+</resources>
