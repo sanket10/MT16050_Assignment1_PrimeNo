@@ -1,5 +1,7 @@
 package com.example.happy.primeno;
 
+import android.util.Log;
+
 /**
  * Created by Happy on 8/15/2016.
  */
@@ -7,11 +9,20 @@ public class Question {
     private String question_type;
     private int number;
     private boolean answer;
+    private static String tag = "Question";
+
+    public Question(String question_type, int number, boolean answer) {
+        this.question_type = question_type;
+        this.number = number;
+        this.answer = answer;
+    }
 
     public Question(){
+        Log.d(tag,"Enter Question() constructor");
         this.setNumber();
         this.setQuestion_Type();
         this.setAnswer();
+        Log.d(tag,"Question object created");
     }
 
     public String getQuestion_type() {
