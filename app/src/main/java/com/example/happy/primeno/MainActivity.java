@@ -55,15 +55,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         int temp_current_question_number = this.current_question_number;
-        if(savedInstanceState != null){
+        if(savedInstanceState != null && savedInstanceState.getInt(MainActivity.state_current_question_number) != 0){
             Log.d(tag,"onCreate inside savedInstanceState");
             this.question = new Question(savedInstanceState.getString(MainActivity.state_question_type),savedInstanceState.getInt(MainActivity.state_question_number),savedInstanceState.getBoolean(MainActivity.state_question_answer));
             this.current_question_number = savedInstanceState.getInt(MainActivity.state_current_question_number);
             question_field = "Question : "+(this.current_question_number)+"\n"+this.question.getNumber()+" is a "+this.question.getQuestion_type()+" number?";
             this.number_of_correct_question = savedInstanceState.getInt(MainActivity.state_number_of_correct_question);
             this.number_of_incorrect_question = savedInstanceState.getInt(MainActivity.state_number_of_incorrect_question);
-            this.question_state = savedInstanceState.getBoolean(MainActivity.state_question_state);
             temp_current_question_number = this.current_question_number - 1;
+            if(this.question_state = savedInstanceState.getBoolean(MainActivity.state_question_state)){
+                temp_current_question_number++;
+            }
         }
 
         //First time view to end user
