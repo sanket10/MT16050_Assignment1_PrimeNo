@@ -1,5 +1,7 @@
 package com.example.happy.primeno;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -31,6 +33,47 @@ public class MainActivity extends AppCompatActivity {
     private int number_of_incorrect_question = 0;
     private int current_question_number = 0;
     private Question question = null;
+    private Button yes_button;
+    private Button no_button;
+    private Button next_button;
+    private Button restart_button;
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        yes_button = (Button)findViewById(R.id.yes);
+        no_button = (Button)findViewById(R.id.no);
+        next_button = (Button)findViewById(R.id.next);
+        restart_button = (Button)findViewById(R.id.restart);
+        yes_button.setBackgroundColor(Color.LTGRAY);
+        no_button.setBackgroundColor(Color.LTGRAY);
+        next_button.setBackgroundColor(Color.LTGRAY);
+        restart_button.setBackgroundColor(Color.LTGRAY);
+        yes_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                checkQuestion(view);
+            }
+        });
+        no_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                checkQuestion(view);
+            }
+        });
+        next_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                nextQuestion(view);
+            }
+        });
+        restart_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                resetAll(view);
+            }
+        });
+    }
 
     @Override
     public View findViewById(@IdRes int id) {
@@ -75,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(tag,"Return onCreate()");
     }
 
+
     //Check the questions on user click
     public void checkQuestion(View v){
         //user can't click on yes/no button till he's not press next question button
@@ -103,9 +147,23 @@ public class MainActivity extends AppCompatActivity {
     public void checkAnswer(View v,boolean answer){
         Log.d(tag,"Enter checkAnswer()");
         if(answer == this.question.getAnswer()){
+            if(answer){
+                //yes_button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                yes_button.setBackgroundColor(Color.GREEN);
+            }else{
+                //no_button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                no_button.setBackgroundColor(Color.GREEN);
+            }
             Toast.makeText(this," Correct Answer ",Toast.LENGTH_SHORT).show();
             this.number_of_correct_question++;
         }else{
+            if(answer){
+                yes_button.setBackgroundColor(Color.RED);
+                no_button.setBackgroundColor(Color.GREEN);
+            }else{
+                yes_button.setBackgroundColor(Color.GREEN);
+                no_button.setBackgroundColor(Color.RED);
+            }
             Toast.makeText(this," Incorrect Answer ",Toast.LENGTH_SHORT).show();
             this.number_of_incorrect_question++;
         }
@@ -118,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
     //Method execute after pressing next button. This method generate new question
     public void nextQuestion(View v){
         Log.d(tag,"Enter nextQuestion()");
+        yes_button.setBackgroundColor(Color.LTGRAY);
+        no_button.setBackgroundColor(Color.LTGRAY);
         if(this.question_state == false){
             Toast.makeText(this,"Please submit the last question answer",Toast.LENGTH_SHORT).show();
             return;
@@ -137,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
         this.current_question_number = 0;
         this.number_of_correct_question = 0;
         this.number_of_incorrect_question = 0;
+        yes_button.setBackgroundColor(Color.LTGRAY);
+        no_button.setBackgroundColor(Color.LTGRAY);
         this.question = null;
         this.question_state = true;
         ((TextView)findViewById(R.id.question)).setText("Press Next Button to Start Quiz");
@@ -188,66 +250,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-/*    public void generateQuestionType(){
-        int ran = (int)(Math.random()*100)%4;
-        if(ran == 0){
-            this.questionType = "even";
-        }else if(ran == 1){
-            this.questionType = "odd";
-        }else if(ran == 2){
-            this.questionType = "prime";
-        }else{
-            this.questionType = "not prime";
-        }
-    }*/
-    /*public void generateNumber(){
-        this.number = (int)(Math.random()*this.mul)%this.mul;
-    }*/
-
-    /*public void setAnswer(View v){
-        String type = this.questionType;
-        String str = "hello "+this.current_question;
-        str = str + " " + type;
-        int num = this.number;
-        if(type.equals("odd") || type.equals("even")){
-            if((num & 1) == 1){
-                if(type.equals("odd")){
-                    this.answer = true;
-                }else{
-                    this.answer = false;
-                }
-            }else{
-                if(type.equals("even")){
-                    this.answer = true;
-                }else{
-                    this.answer = false;
-                }
-            }
-        }else{
-            boolean prime = true;
-            for(int i = 2;i <= Math.sqrt(num);i++){
-                if(num%i == 0){
-                    prime = false;
-                    break;
-                }
-            }
-            if(prime && type.equals("prime")){
-                this.answer = true;
-            }else if(!prime && type.equals("not prime")){
-                this.answer = true;
-            }else{
-                this.answer = false;
-            }
-        }
-        if(this.status)
-            str = str + " true";
-        else
-            str = str + " false";
-    }*/
-
-/*
-    public void getMe(View wv){
-        TextView text = (TextView)findViewById(R.id.textView);
-        text.setText("kaslf");
-        Toast.makeText(getBaseContext(),"Hi click working",Toast.LENGTH_LONG).show();
-    }*/

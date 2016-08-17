@@ -20,7 +20,6 @@
         android:layout_weight="0.35"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="nextQuestion"
         android:textStyle="bold"
         android:nestedScrollingEnabled="true" />
 
@@ -34,7 +33,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/yes"
@@ -43,11 +41,9 @@
         android:layout_alignTop="@+id/no"
         android:layout_alignStart="@+id/question"
         android:layout_alignBottom="@+id/no"
-        android:layout_toStartOf="@+id/next"
-        android:onClick="checkQuestion" />
+        android:layout_toStartOf="@+id/next"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:textStyle="bold"
         android:layout_height="wrap_content"
@@ -56,11 +52,9 @@
         android:layout_below="@+id/question"
         android:layout_alignEnd="@+id/question"
         android:layout_marginTop="78dp"
-        android:layout_toEndOf="@+id/next"
-        android:onClick="checkQuestion" />
+        android:layout_toEndOf="@+id/next"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Restart"
@@ -68,8 +62,7 @@
         android:textStyle="bold"
         android:layout_marginTop="139dp"
         android:layout_below="@+id/next"
-        android:layout_alignParentStart="true"
-        android:onClick="resetAll" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
